@@ -1,5 +1,5 @@
 <div class="errorPopUp"  *ngIf="popUpFlag"   [ngClass]="{'success':isSuccess,'fail':!isSuccess}">
- {{isSuccess?'Data Sent Successfully' :'Error While Sending Data'}}
+ {{isSuccess?'Data Sent Successfully' :'Adding A Post Failed'}}
 </div>
 <div class="container1">
   <button class="btn" (click)="openForm()">

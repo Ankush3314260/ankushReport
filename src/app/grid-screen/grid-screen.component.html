@@ -1,0 +1,46 @@
+<div class="errorPopUp"  *ngIf="popUpFlag"   [ngClass]="{'success':isSuccess,'fail':!isSuccess}">
+ {{isSuccess?'Data Sent Successfully' :'Error While Sending Data'}}
+</div>
+<div class="container1">
+  <button class="btn" (click)="openForm()">
+    {{formFlag?'Back':'Add'}}
+  </button>
+</div>
+<section class="container2" *ngIf="!formFlag">
+<table >
+    <thead class="headTable">
+        <th>Sr. No.</th>
+        <th>Title</th>
+        <th>Body</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of postArray;let i = index">
+            <td>{{i+1}}</td>
+            <td>{{item.title!=null?item.title:''}}</td>
+            <td>{{item.body!=null?item.body:''}}</td>
+        </tr>
+    </tbody>
+</table>
+</section>
+
+<section *ngIf="formFlag">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="title">Title :</label>
+            <input type="text" id="title" formControlName="title" >
+            <span class="error-msg err-block" *ngIf="myForm.get('title')?.errors?.['required'] && myForm.get('title')?.touched"> <i>title is required</i></span>
+        </div>
+        <div>
+            <label for="body">Body :</label>
+            <input type="text" id="body" formControlName="body">
+             <span class="error-msg err-block" *ngIf="myForm.get('body')?.errors?.['required'] && myForm.get('body')?.touched"> <i>body is required</i></span>
+        </div>
+
+        <button type="submit" [disabled]="myForm.invalid">
+            Submit
+        </button> 
+
+    </form>
+</section>
+
+
